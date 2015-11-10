@@ -18,15 +18,17 @@ from django.contrib import admin
 
 from rest_framework import routers
 from polls.views import QuestionViewSet
-from ClinicAppointment.views import ClinicsViewSet
-
+from ClinicAppointment.views import ClinicViewSet
+from ClinicAppointment.views import AppointmentViewSet
 
 router = routers.DefaultRouter()
 router.register(r'questions', QuestionViewSet)
+router.register(r'clinics',ClinicViewSet)
+router.register(r'appointment',AppointmentViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/questions/', include('polls.urls', namespace='questions')),
-    url(r'^api/clinicapp/', include('ClinicAppointment.urls', namespace='clinicapp')),
+    url(r'^api/clinics/', include('polls.urls', namespace='clinics')),
     url(r'^', include(router.urls)),
 ]

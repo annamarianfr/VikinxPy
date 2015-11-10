@@ -3,4 +3,5 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Clinics)
+admin.site.register(Clinic)
+admin.site.register(Appointment)

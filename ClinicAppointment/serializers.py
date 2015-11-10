@@ -1,9 +1,13 @@
 from rest_framework import serializers
 
-from .models import Clinics
+from .models import Clinic,Appointment
 
 
-class ClinicsSerializer(serializers.ModelSerializer):
+class ClinicSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Clinics
-        fields = ('id', 'name', 'lati','longi')
+        model = Clinic
+        #fields = ('id', 'name_clinic', 'latitude','longitude')
+
+class AppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
