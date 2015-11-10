@@ -18,6 +18,7 @@ from django.contrib import admin
 
 from rest_framework import routers
 from polls.views import QuestionViewSet
+from ClinicAppointment.views import ClinicsViewSet
 
 
 router = routers.DefaultRouter()
@@ -26,5 +27,6 @@ router.register(r'questions', QuestionViewSet)
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/questions/', include('polls.urls', namespace='questions')),
+    url(r'^api/clinicapp/', include('ClinicAppointment.urls', namespace='clinicapp')),
     url(r'^', include(router.urls)),
 ]

@@ -40,7 +40,7 @@ INSTALLED_APPS = (
     # installed modules
     'rest_framework',
     # apps
-    'polls',
+    'ClinicAppointment',
 )
 
 MIDDLEWARE_CLASSES = (
