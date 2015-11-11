@@ -26,6 +26,14 @@ SECRET_KEY = '*sm1@zvfvg2wrv0wlkzap)5k)i#bl)q9a1fs02q2cwqi41r3-1'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'clinic.a.point@gmail.com'
+EMAIL_HOST_PASSWORD = 'hjthcagigbwbwduo'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+DEFAULT_FROM_EMAIL = 'clinic.a.point@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 
 # Application definition
