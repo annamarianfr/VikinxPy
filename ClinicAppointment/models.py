@@ -6,7 +6,7 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 SEX=(("M","masculin"),("F","feminin"))
-STATUS=(("waiting","W"),("confirmed","C"),("finalized","F"))
+STATUS=(("Waiting","Waiting"),("Confirmed","Confirmed"),("Finalized","Finalized"))
 CHARSET = '0123456789ABCDEFGHJKMNPQRSTVWXYZabcdefghijklmnopqrstuvwxyz'
 LENGTH = 6
 MAX_TRIES = 32
@@ -41,8 +41,8 @@ class Appointment(models.Model):
         return str(self.id)+". "+self.first_name+" "+self.last_name
     
     def save(self, *args, **kwargs):
-        send_mail('Test1','Test',settings.EMAIL_HOST_USER,['annamarianfr@gmail.com'],fail_silently=False)
-        if (self.code!="123456"):
+        #send_mail('Test1','Test',settings.EMAIL_HOST_USER,['annamarianfr@gmail.com'],fail_silently=False)
+        if (self.code=="123456"):
             loop_num = 0
             unique = False
             while not unique:
@@ -56,4 +56,8 @@ class Appointment(models.Model):
                     loop_num += 1
                 else:
                     raise ValueError("Couldn't generate a unique code.")
+        if self.id:
+            old_app = Appointment.objects.get(pk=self.id)
+            if old_app.status == "Waiting" and self.status == "Confirmed":
+                print "Merge"
         super(Appointment, self).save(*args, **kwargs)
