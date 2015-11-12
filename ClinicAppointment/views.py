@@ -54,9 +54,9 @@ class AppointmentListView(APIView):
         serializer = AppointmentSerializer(data=request.data)
         if serializer.is_valid():
             email=serializer.data['email']
-            code=serializer.data['code']
-            status9=serializer.data['status']
-            send_mail('Test3','Test %s %s'%(code,status9),EMAIL_HOST_USER,[email],fail_silently=False)
             serializer.save()
+            code_app = Appointment.objects.last().code_app
+            # code_app=serializer.data['code_app']
+            send_mail('Appointment Received','We received your appointment request. Thank you for using Clinic@Point! You will receive a confirmation email soon. You can check your appontment status by typing the following code in our application.\n Your code: %s'%(code_app),EMAIL_HOST_USER,[email],fail_silently=False)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)       
