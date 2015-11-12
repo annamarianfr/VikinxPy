@@ -1,0 +1,38 @@
+<html>
+<head>
+	<title>
+		best
+	</title>
+	<style>
+		table, th, td {
+    		border: 1px solid black;
+    		border-collapse: collapse;
+		}
+		th, td {
+    		padding: 5px;
+    		text-align: left;
+		}
+	</style>
+</head>
+<body>
+	<h1>Appointments analytics</h1>
+	<table style="width:30%">
+		<tr>
+    		<th>Waiting:</th>
+    		<td>{{ waiting }}</td>
+  		</tr>
+  		<tr>
+    		<th>Confirmed:</th>
+    		<td>{{ confirmed }}</td>
+  		</tr>
+  		<tr>
+    		<th>Finalized:</th>
+    		<td>{{ finalized }}</td>
+  		</tr>
+  		<tr>
+    		<th>Total:</th>
+    		<td>{{ total }}</td>
+  		</tr>
+	</table>
+</body>
+</html>

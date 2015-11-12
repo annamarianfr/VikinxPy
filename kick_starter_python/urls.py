@@ -18,7 +18,7 @@ from django.contrib import admin
 
 from rest_framework import routers
 from polls.views import QuestionViewSet
-from ClinicAppointment.views import ClinicViewSet
+from ClinicAppointment.views import ClinicViewSet, home
 from ClinicAppointment.views import AppointmentViewSet
 
 router = routers.DefaultRouter()
@@ -31,5 +31,5 @@ urlpatterns = [
     url(r'^api/questions/', include('polls.urls', namespace='questions')),
     url(r'^api/', include('ClinicAppointment.urls', namespace='clinic')),
     url(r'^api/',include('ClinicAppointment.urls',namespace='appointment')),
-    url(r'^', include(router.urls)),
+    url(r'^', home),
 ]
