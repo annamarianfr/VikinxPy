@@ -62,14 +62,14 @@ class AppointmentDetailView(APIView):
     """
     Retrieve, update or delete a snippet instance.
     """
-    def get_object(self, pk):
+    def get_object(self, code_app):
         try:
-            return Appointment.objects.get(pk=pk)
+            return Appointment.objects.get(code_app=code_app)
         except Appointment.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk, format=None):
-        appointment = self.get_object(pk)
+    def get(self, request, code_app, format=None):
+        appointment = self.get_object(code_app)
         serializer = AppointmentSerializer(appointment)
         return Response(serializer.data)
 
