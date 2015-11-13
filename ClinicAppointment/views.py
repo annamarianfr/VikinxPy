@@ -5,9 +5,7 @@ from .models import Clinic,Appointment
 from .serializers import ClinicSerializer,AppointmentSerializer
 import django
 from kick_starter_python.settings import EMAIL_HOST_USER 
-
 from django.conf import settings
-
 from django.core.mail import send_mail
 from django.shortcuts import render
 # Create your views here.
@@ -56,11 +54,32 @@ class AppointmentListView(APIView):
             email=serializer.data['email']
             serializer.save()
             code_app = Appointment.objects.last().code_app
-            # code_app=serializer.data['code_app']
             send_mail('Appointment Received','We received your appointment request. Thank you for using Clinic@Point! You will receive a confirmation email soon. You can check your appontment status by typing the following code in our application.\n Your code: %s'%(code_app),EMAIL_HOST_USER,[email],fail_silently=False)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)       
 
+class AppointmentDetailView(APIView):
+    """
+    Retrieve, update or delete a snippet instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Appointment.objects.get(pk=pk)
+        except Appointment.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        appointment = self.get_object(pk)
+        serializer = AppointmentSerializer(appointment)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        appointment = self.get_object(pk)
+        serializer = AppointmentSerializer(appointment, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 def home(request):
     template_name = 'home.html'

@@ -17,9 +17,10 @@ class Clinic(models.Model):
     longitude = models.FloatField(default=0)
     
     def __unicode__(self):
-        return self.name_clinic
+        return str(self.id)+". "+self.name_clinic
 
 class Appointment(models.Model):
+    clinic_app=models.ForeignKey(Clinic)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)
