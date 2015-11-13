@@ -59,7 +59,7 @@ class Appointment(models.Model):
         if self.id:
             old_app = Appointment.objects.get(pk=self.id)
             if (old_app.status=="Waiting" and self.status == "Confirmed"):
-                send_mail('Appointment Confirmed','This is a confirmation email to your appointment. \nLooking forward to your presence on %s '%(self.date_fin),EMAIL_HOST_USER,[self.email],fail_silently=False)
+                send_mail('Appointment Confirmed','This is a confirmation email to your appointment. \nLooking forward to your presence at %s on %s '%(self.clinic_app.name_clinic, self.date_fin),EMAIL_HOST_USER,[self.email],fail_silently=False)
             elif (old_app.status == "Confirmed" and self.status == "Finalized"):
                 send_mail('Appointment Finalized','Appointment finalized! Thank you for using Clinic@Point!',EMAIL_HOST_USER,[self.email],fail_silently=False)
         super(Appointment, self).save(*args, **kwargs)
